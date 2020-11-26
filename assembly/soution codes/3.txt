@@ -1,0 +1,51 @@
+movi r0 
+200
+movi r4
+190
+movs r4
+load r3
+movs r3
+movd r11
+movd r3
+movd r5
+movs r0
+movd r2
+loopfor1:
+movs r5
+movd r11 
+movs r2
+movd r0
+loopfor2:
+movs r0
+load r7
+movs r0
+adi 01
+movd r1
+load r8
+movs r7
+cmp r8
+jmpdm swap
+jmpdu apple
+swap:
+movs r0
+store r8
+movs r1
+store r7
+jmpdu apple
+apple:
+movs r0
+adi
+01
+movd r0
+movs r11
+subi
+01
+movd r11
+jmpdnz loopfor2
+movs r3
+subi
+01
+movd r3
+jmpdnz loopfor1
+stop 
+

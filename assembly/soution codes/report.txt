@@ -1,0 +1,142 @@
+Question 1: Fibonacci 
+
+movi r0
+50
+movs r0  
+load r1  // the first 4 instructions stores the value of address 50 to r1(which is value of x)
+movi r2  //  r2 is the 1st fibonacci number (0)
+0s the loo[
+movi r3  //r3 is the 2nd fibonacci number (1)
+1
+loop:
+movs r3
+movd r4 //storing the value of r3 in r4(temporary variable) as when we do r3=r2+r3 the value of r3 will be lost (but we need it to store it in r2)
+movs r3
+add r2
+movd r3 //r3=r2+r3(as in fibonacci we get the next number by adding the previous two numbers )
+movs r4 
+movd r2 //storing the previous value of r3 in r2 
+movs r3  //r3 is the new fibonacci number .comparing with x(stored in r1)
+cmp r1
+jmpdp loop //if the number goes >x then loop exits otherwise the loop is continued(here we gave jmpdp not jmpdm as here in this sim it works the opposite way) 
+exit:
+movs r3 // the fibonacci number <=x is r3
+movd r5 //moved r3 to r5(the target register)
+stop 
+
+summary:
+         first we calculate fibonacci numbers and keep checking till the number exceeds x (when it does we exit loop )
+
+Question 2: Help Rahul 
+
+movi r7
+100
+movs r7
+load r1 //r1 contains the first number
+movi r6
+110
+movs r6
+load r2 //r2 contains the second number 
+movs r2
+cmp r1 //checking if r1=r2 the the gcd is r1 so we got to the label exit4
+jmpdz exit4
+jmpdm bag  //if r1<r2 then we go to loop otherwise we swap the values
+jmpdp apple  //go to the label apple to swap values as r2<r1
+apple: 
+movs r1
+movd r3
+movs r2
+movd r1
+movs r3
+movd r2  //we swapped the values of r1 and r2
+jmpdu bag  // after we do this we enter the loop
+bag:
+loop:
+movs r2
+cmp r1
+jmpdz exit4  // this is the condition when we must exit the loop as this is when gcd is r2(the remainder is 0 as r2-r1=0(remainder) this is when r2 is gcd by euclid algorithm 
+movs r2
+sub r1//here we are actually dividing but as we dont have divide command we are subtracting till the number after subtracting becomes less than r1.if so then it is the remainder .(that time we go to exit2)
+movd r2
+cmp r1
+jmpdz exit4  //(if equal then r2 is gcd)
+jmpdp exit2
+jmpdm loop
+exit2:  //when we get remainder then the new dividend becomes the previous quotient and the remainder becomes the quotient
+movs r1
+movd r4
+movs r2
+movd r1
+movs r4
+movd r2
+jmpdu loop
+exit:  //please ignore this label this is not used in the program as this was not removed when i modified the program
+movs r2
+sub r1
+movd r5
+stop //this labe; is never called
+exit4:  // r2 is the gcd and it is the stored in target register r5
+movs r2
+movd r5
+stop 
+
+summary:
+        the required answer is the gcd of the two numbers .this is found using euclid algorithm .since we dont have means to find the remainder by division we do repeated subtraction to get the remainder.
+
+
+Question 3: The Star Wars ’order’ dilemma
+
+movi r0 //storing the initial address in r0 
+200
+movi r4 
+190
+movs r4
+load r3 //storing the value of n in r3
+movs r3
+movd r11 //storing value of n in r11(for future use)
+movd r3
+movd r5  //storing value of n in r5(for future use)
+movs r0
+movd r2  //storing value of r0 i.e 200 in r2(as we have two loops when you come back for next iteration you shoud again start from 200)
+loopfor1:  //first loop(equivalent to for(i=0;i<n;i++) in bubble sort 
+movs r5
+movd r11  //storing the value of n in r11
+movs r2
+movd r0  //storing 200 in r0
+loopfor2:  //second loop (equivalent to for(j=0;j<n;j++) in bubble sort
+movs r0
+load r7  //this contains the value of (200+j)th address
+movs r0
+adi 01
+movd r1  //when need next address as we are comparing the jth and j+1th element in bubble sort
+load r8  //this contains the value of (200+j+1)th address
+movs r7
+cmp r8    //comparing the jth and j+1th element (bubble sort)
+jmpdm swap   //if the j+1 th element is less than the jth element then we swap them 
+jmpdu apple  //the loop is continued 
+swap:  // swapping the elements(and storing the memory locations)
+movs r0
+store r8
+movs r1
+store r7
+jmpdu apple
+apple:
+movs r0  //incrementing the address like j++
+adi
+01
+movd r0
+movs r11  //doing n-- as we have to run the loop n times so when n becomes 0 we exit loop(for j loop)
+subi
+01
+movd r11
+jmpdnz loopfor2
+movs r3  //doing n-- as we have to run the loop n times so when n becomes 0 we exit loop(for i loop)
+subi
+01
+movd r3
+jmpdnz loopfor1
+stop 
+
+summary :
+          here we are doing bubble sort to swap the elements.i have taken analogous to c bubble sort by considering loops like for and found their equivalent codes in assembly language.
+

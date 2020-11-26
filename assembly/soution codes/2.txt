@@ -1,0 +1,51 @@
+movi r7
+100
+movs r7
+load r1
+movi r6
+110
+movs r6
+load r2
+movs r2
+cmp r1
+jmpdz exit4
+jmpdm bag
+jmpdp apple
+apple:
+movs r1
+movd r3
+movs r2
+movd r1
+movs r3
+movd r2
+jmpdu bag
+bag:
+loop:
+movs r2
+cmp r1
+jmpdz exit4
+movs r2
+sub r1
+movd r2
+cmp r1
+jmpdz exit4
+jmpdp exit2
+jmpdm loop
+exit2:
+movs r1
+movd r4
+movs r2
+movd r1
+movs r4
+movd r2
+jmpdu loop
+exit:
+movs r2
+sub r1
+movd r5
+stop 
+exit4:
+movs r2
+movd r5
+stop 
+
